@@ -1,9 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Noto_Serif_TC, Playfair_Display } from "next/font/google";
+import {
+  Geist_Mono,
+  Noto_Sans_TC,
+  Noto_Serif_TC,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const notoSerifTC = Noto_Serif_TC({
+const notoSansTC = Noto_Sans_TC({
   subsets: ["latin"],
   weight: ["400", "500", "700", "900"],
   variable: "--font-sans",
@@ -42,18 +48,17 @@ export default function RootLayout({
         "h-full",
         "antialiased",
         "font-sans",
-        notoSerifTC.variable,
+        notoSansTC.variable,
         geistMono.variable,
         playfairDisplay.variable,
       )}
     >
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.vash.network/fontawesome/6.6.0/css/all.css"
-        />
+        <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }

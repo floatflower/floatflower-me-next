@@ -1,734 +1,485 @@
-import dayjs from "dayjs";
-import { postLoader } from "@/server/post-loader";
-import { HeroBlock } from "./_components/blocks/intro/hero-block";
-import { PosterHeroBlock } from "./_components/blocks/intro/poster-hero-block";
-import { SplitHeroBlock } from "./_components/blocks/intro/split-hero-block";
-import { FullbleedHeroBlock } from "./_components/blocks/intro/fullbleed-hero-block";
-import { ImageGridBlock } from "./_components/blocks/gallery/image-grid-block";
-import { ImageReelBlock } from "./_components/blocks/gallery/image-reel-block";
-import { MosaicGalleryBlock } from "./_components/blocks/gallery/mosaic-gallery-block";
-import { BentoGalleryBlock } from "./_components/blocks/gallery/bento-gallery-block";
-import { FocusGalleryBlock } from "./_components/blocks/gallery/focus-gallery-block";
-import { PolaroidGalleryBlock } from "./_components/blocks/gallery/polaroid-gallery-block";
-import { StatementBlock } from "./_components/blocks/editorial/statement-block";
-import { PhilosophyBlock } from "./_components/blocks/editorial/philosophy-block";
-import { SplitTextBlock } from "./_components/blocks/editorial/split-text-block";
-import { PullQuoteBlock } from "./_components/blocks/editorial/pull-quote-block";
-import { ManifestoBlock } from "./_components/blocks/editorial/manifesto-block";
-import { VideoHeroBlock } from "./_components/blocks/theater/video-hero-block";
-import { VideoSpotlightBlock } from "./_components/blocks/theater/video-spotlight-block";
-import { VideoEditorialBlock } from "./_components/blocks/theater/video-editorial-block";
-import { TimelineBlock } from "./_components/blocks/archive/timeline-block";
-import { FeaturePostBlock } from "./_components/blocks/showcase/feature-post-block";
-import { CardGridShowcaseBlock } from "./_components/blocks/showcase/card-grid-showcase-block";
-import { MagazineShowcaseBlock } from "./_components/blocks/showcase/magazine-showcase-block";
-import { MinimalListShowcaseBlock } from "./_components/blocks/showcase/minimal-list-showcase-block";
-import { CtaBlock } from "./_components/blocks/cta/cta-block";
-import { WaveformPlayerBlock } from "./_components/blocks/vinyl/waveform-player-block";
-import { CoverPlayerBlock } from "./_components/blocks/vinyl/cover-player-block";
-import { PurseHeroBlock } from "./_components/blocks/intro/purse-hero-block";
-import { StorySplitBlock } from "./_components/blocks/story/story-split-block";
-import { StoryImageAsideBlock } from "./_components/blocks/story/story-image-aside-block";
-import { StoryCenteredBlock } from "./_components/blocks/story/story-centered-block";
-import { StoryStackedBlock } from "./_components/blocks/story/story-stacked-block";
-import { LinksGridBlock } from "./_components/blocks/links/links-grid-block";
-import { CtaTagsBlock } from "./_components/blocks/cta/cta-tags-block";
-import { CtaFullTextBlock } from "./_components/blocks/cta/cta-full-text-block";
-import { CtaTagIndexBlock } from "./_components/blocks/cta/cta-tag-index-block";
-import { CharacterShowcaseBlock } from "./_components/blocks/intro/character-showcase-block";
+import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { PhotoGrid } from "./_components/photo-grid";
+import { AvatarLightbox } from "./_components/avatar-lightbox";
 
-const REEL_IMAGES = [
-  "/images/home/image-1.jpg",
-  "/posts/hello-world/images/image1.jpg",
-  "/images/home/image-2.jpg",
-  "/posts/hello-world/cover.jpg",
-  "/images/home/image-3.jpg",
-  "/posts/hello-world/images/image2.jpg",
-];
+export const metadata: Metadata = {
+  title: "黃建霖 Jerry Huang — Portfolio",
+  description: "一個熱衷於手工藝、料理的資深全端工程師",
+};
 
-export default async function Home() {
-  const allPosts = postLoader().sort(
-    (a, b) =>
-      dayjs(b.metadata.createdAt).valueOf() -
-      dayjs(a.metadata.createdAt).valueOf(),
-  );
+const DATA = {
+  name: { zh: "黃建霖", en: "Jerry Huang" },
+  tagline: "一個熱衷於手工藝、料理的資深全端工程師",
+  links: [
+    {
+      label: "floatflower.me",
+      tooltip: "floatflower.me",
+      url: "https://floatflower.me",
+      icon: "fa-solid fa-globe",
+    },
+    {
+      label: "GitHub",
+      tooltip: "GitHub",
+      url: "https://github.com/floatflower",
+      icon: "fa-brands fa-github",
+    },
+    {
+      label: "Unsplash",
+      tooltip: "Unsplash",
+      url: "https://unsplash.com/@floatflower",
+      icon: "fa-brands fa-unsplash",
+    },
+    {
+      label: "Instagram",
+      tooltip: "floatflower.kitchen",
+      url: "https://www.instagram.com/floatflower.kitchen",
+      icon: "fa-brands fa-instagram",
+    },
+    {
+      label: "Email",
+      tooltip: "floatflower1029@gmail.com",
+      url: "mailto:floatflower1029@gmail.com",
+      icon: "fa-solid fa-envelope",
+    },
+  ],
+  experience: [
+    {
+      role: "技術長 (CTO)",
+      company: "跳跳股份有限公司",
+      location: "台灣，台中",
+      period: "2018.07 — 2020.12",
+      desc: "主導六人技術團隊，全權負責系統架構規劃與核心技術決策，帶領產品從無到有完整落地。",
+      highlights: [
+        "主導 JINS 台灣官方網站及後台管理系統的設計與開發",
+        "設計並實作門市 POS 出單系統：將 Rust 程式交叉編譯後部署至市售 OpenWRT 路由器，作為門市邊緣網關，以極低硬體成本打通雲端與地端的即時出單鏈路",
+      ],
+    },
+    {
+      role: "創辦人 · 全端工程師",
+      company: "Fresco Technology 賦睿科技",
+      location: "台灣，台中",
+      period: "2021.01 — 2023.03",
+      desc: "創立個人開發公司，獨立承接並交付多元前後端專案，範疇涵蓋 Web App 開發、API 設計與雲端基礎設施建置。",
+      highlights: [
+        "獨立完成 GhettoSharkhood ERC721 NFT 智能合約及 Mint DApp 開發，並成功上線發行",
+        "承接 Jerawine.com 外包開發，負責全端實作與交付",
+      ],
+    },
+    {
+      role: "後端工程師",
+      company: "Jerawine",
+      location: "英國（遠端）",
+      period: "2023.03 — 至今",
+      desc: "以單一後端工程師身份，遠端服務英國紅酒借貸新創，獨立承擔從需求分析、架構設計、基礎設施維運到系統持續迭代的完整開發週期。",
+      highlights: [
+        "主導平台 v1（Symfony PHP）的開發與維運；需求穩定後推動全面架構重設計，以 Next.js + GraphQL + PostgreSQL 重構為 v2，系統性消除早期技術債",
+        "對 Livex 逾 3,500 萬筆紅酒歷史交易資料進行建模分析，以 R 語言產出價格預測指標，輔助信貸審核決策",
+        "獨力建置並維運完整基礎設施，涵蓋 GitLab CI/CD pipeline、AWS App Runner 與 RDS 的全自動化部署流程",
+        "並行協助母公司 Coterie Holdings（英國）開發內部管理系統",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "國立台中教育大學",
+      dept: "資訊工程學系",
+      period: "2015 — 2021",
+      note: "學士 · 台灣，台中 · 畢業專題第二名",
+    },
+    {
+      school: "華中科技大學",
+      dept: "軟件工程學院",
+      period: "2016.07 — 2017.02",
+      note: "交換學生 · 湖北，武漢 · 入選校內創業團隊冰岩作坊",
+    },
+    {
+      school: "國立台中第一高級中學",
+      dept: "",
+      period: "2013 — 2015",
+      note: "畢業",
+    },
+  ],
+  projects: [
+    {
+      name: "創作者內容分享及社群平台",
+      year: "2025",
+      status: "上線中",
+      solo: "全端獨立開發",
+      scale: ["3,000+ 使用者", "100+ 創作者"],
+      summary:
+        "一手規劃並獨立開發的數位內容交易平台，讓創作者得以販售照片、影片等數位商品，同時提供完整的點數儲值與合規出金流程。",
+      highlights: [
+        "圖片管線：以 Node.js + Sharp 進行初步壓縮，再結合 Cloudflare Images、Worker、Durable Object 與 CDN，於邊緣節點完成即時縮圖處理與全球分發",
+        "影片管線：透過 Coconut.co 將影片轉碼為 HLS 串流，同步產出 GIF 動態縮圖與 JPEG 靜態縮圖；以 Cloudflare Worker + CDN 實現受控的內容存取與分發",
+        "後端服務以 Docker 容器化，部署於 DigitalOcean App Platform，具備自動水平擴展能力",
+        "串接藍新金流處理點數儲值；出金機制符合台灣勞報單申報規範，並設有 7 天交易冷卻期以確保資金安全",
+        "站內點數支援 QR Code 即時收款，讓創作者在實體活動現場也能與粉絲無縫完成點數交易",
+      ],
+      note: "如需進一步了解平台細節，歡迎面談時詢問。",
+      tech: ["Next.js", "PostgreSQL", "Cloudflare", "Docker", "藍新金流"],
+    },
+    {
+      name: "短影音互動平台",
+      year: "2024",
+      status: "已被收購",
+      solo: "後端獨立開發",
+      scale: ["8,000+ 使用者", "50+ 創作者"],
+      summary:
+        "專為短影音創作者打造的社群平台，具備 DRM 版權加密播放、即時聊天傳影片及 VIP 訂閱機制。後端由本人獨立開發，平台後續獲其他公司收購並持續營運至今。",
+      highlights: [
+        "影片管線：Coconut.co 轉碼為 HLS 串流後，串接 Axinom DRM 服務分別封裝 Widevine（Chrome）與 FairPlay（Safari）兩種加密格式，確保跨瀏覽器的版權保護播放",
+        "即時聊天：基於 Firebase Firestore Realtime 構建，支援訊息即時同步與影片訊息傳送",
+        "聊天影片管線：自主開發並部署於 GCP Cloud Run 的影片編碼服務，自動產出縮圖、HLS 串流及模糊預覽版本，兼顧體驗與內容保護",
+        "整體後端以 Firebase + GCP Cloud Run + BunnyCDN 架構承載，在彈性擴展與邊緣分發效能間取得平衡",
+        "串接 TapPay 實作 VIP 訂閱制度，付費會員享有平台專屬特權與創作者互動福利",
+      ],
+      note: "如需進一步了解平台細節，歡迎面談時詢問。",
+      tech: [
+        "Firebase",
+        "GCP Cloud Run",
+        "BunnyCDN",
+        "Axinom DRM",
+        "Coconut.co",
+        "TapPay",
+      ],
+    },
+  ],
+  languages: [
+    { lang: "中文", level: "母語", pct: 100 },
+    { lang: "英文", level: "中等偏上", pct: 70 },
+    { lang: "日文", level: "中等", pct: 40 },
+  ],
+  skills: [
+    { cat: "Frontend", items: ["React", "Next.js"] },
+    {
+      cat: "Backend",
+      items: [
+        "Nest.js",
+        "Express.js",
+        "Symfony PHP",
+        "GraphQL (Apollo)",
+        "Prisma",
+        "Temporal",
+      ],
+    },
+    { cat: "Search & Queue", items: ["Typesense", "Algolia", "RabbitMQ"] },
+    { cat: "Database", items: ["PostgreSQL", "MySQL", "Redis", "Valkey"] },
+    {
+      cat: "Cloud & Infra",
+      items: [
+        "AWS",
+        "GCP",
+        "Firebase",
+        "Digital Ocean",
+        "Docker",
+        "Cloudflare",
+      ],
+    },
+    { cat: "Web3", items: ["ERC721", "ERC20"] },
+  ],
+};
 
-  const featuredPost = allPosts[0];
-  const showcaseItems = allPosts.slice(0, 6).map((p) => ({
-    title: p.metadata.title ?? p.slug,
-    excerpt: p.metadata.excerpt as string | undefined,
-    date: p.metadata.createdAt
-      ? dayjs(p.metadata.createdAt).format("MMM D, YYYY")
-      : undefined,
-    href: `/posts/${p.slug}`,
-    image:
-      (p.metadata.coverImage as { url?: string } | undefined)?.url ??
-      "/posts/hello-world/images/image2.jpg",
-    tags: Array.isArray(p.metadata.tags)
-      ? (p.metadata.tags as string[]).slice(0, 2)
-      : undefined,
-  }));
-  const timelineItems = allPosts.slice(0, 6).map((p) => ({
-    date: dayjs(p.metadata.createdAt).format("MMM YYYY"),
-    title: p.metadata.title ?? p.slug,
-    href: `/posts/${p.slug}`,
-    tag: Array.isArray(p.metadata.tags)
-      ? (p.metadata.tags as string[])[0]
-      : undefined,
-  }));
-
+export default function PortfolioPage() {
   return (
-    <div className="h-dvh overflow-hidden">
-      <div className="h-full overflow-y-scroll snap-y snap-mandatory [&>section]:h-dvh">
-        <HeroBlock
-          id="hero"
-          label="Welcome to"
-          title="Handcraft"
-          subtitle="文字是手工藝，每一篇都是用心雕琢的作品。"
-          backgroundLetter="H"
-          nav={{
-            logo: "Handcraft",
-            links: [
-              { label: "文章", href: "/posts" },
-              { label: "關於", href: "/about" },
-            ],
-          }}
+    <div className="bg-white min-h-screen">
+      {/* ── Hero ─────────────────────────────────────── */}
+      <div className="relative w-full aspect-[4/1] overflow-hidden bg-stone-100">
+        <img
+          src="/images/portfolio/cover.avif"
+          alt="cover"
+          className="absolute inset-0 w-full h-full object-cover object-[center_40%]"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+      </div>
 
-        <ImageGridBlock
-          id="image-grid"
-          images={[
-            { src: "/images/home/image-1.jpg" },
-            { src: "/images/home/image-2.jpg" },
-            { src: "/images/home/image-3.jpg" },
-          ]}
-        />
+      {/* ── Identity ─────────────────────────────────── */}
+      <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="-mt-16 mb-4">
+          <AvatarLightbox />
+        </div>
 
-        <MosaicGalleryBlock
-          id="mosaic-gallery"
-          images={[
-            { src: "/images/home/image-1.jpg" },
-            { src: "/posts/hello-world/cover.jpg" },
-            { src: "/images/home/image-3.jpg" },
-          ]}
-          caption="Gallery"
-        />
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold tracking-tight leading-tight text-stone-800">
+            {DATA.name.zh}
+            <span className="ml-2.5 text-base font-normal text-stone-500">
+              {DATA.name.en}
+            </span>
+          </h1>
+          <p className="text-sm text-stone-500 mt-1">{DATA.tagline}</p>
+        </div>
 
-        <SplitHeroBlock
-          id="split-hero"
-          eyebrow="Handcraft Studio"
-          title={"慢工，\n出細活。"}
-          subtitle="不追流量，只追求值得反覆閱讀的文字。每一篇都花時間沉澱。"
-          image="/images/home/image-2.jpg"
-          ctaText="閱讀文章"
-          ctaHref="/posts"
-          secondaryCtaText="關於這裡"
-          secondaryCtaHref="/about"
-          tags={["文字", "創作", "生活", "思考"]}
-          imageSide="right"
-        />
+        <div className="flex flex-wrap gap-5 pb-8 border-b border-stone-200">
+          {DATA.links.map((link) => (
+            <Tooltip key={link.label}>
+              <TooltipTrigger>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="text-stone-400 hover:text-stone-700 transition-colors text-xl"
+                >
+                  <i className={link.icon} />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>{link.tooltip}</TooltipContent>
+            </Tooltip>
+          ))}
+        </div>
+      </div>
 
-        <BentoGalleryBlock
-          id="bento-gallery"
-          label="Collection"
-          images={[
-            { src: "/images/home/image-1.jpg" },
-            { src: "/posts/hello-world/images/image1.jpg" },
-            { src: "/images/home/image-2.jpg" },
-            { src: "/posts/hello-world/cover.jpg" },
-            { src: "/images/home/image-3.jpg" },
-          ]}
-        />
+      {/* ── Main content ─────────────────────────────── */}
+      <div className="max-w-3xl mx-auto px-6 py-10 flex flex-col gap-14">
+        {/* Skills */}
+        <section>
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
+            技術能力 Skills
+          </h2>
+          <div className="flex flex-col gap-4">
+            {DATA.skills.map((cat) => (
+              <div key={cat.cat} className="flex gap-4 items-start">
+                <span className="text-xs text-stone-400 w-28 shrink-0 pt-0.5 text-right">
+                  {cat.cat}
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {cat.items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-xs px-2.5 py-1 rounded-md border border-stone-200 text-stone-600 bg-stone-100/40"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <FullbleedHeroBlock
-          id="fullbleed-hero"
-          title={"用文字\n丈量生活。"}
-          eyebrow="Handcraft"
-          image="/images/home/image-3.jpg"
-          overlayOpacity={55}
-          metaValue="2024"
-          metaLabel="創立至今"
-          ctaText="開始探索"
-          ctaHref="/posts"
-          nav={{
-            logo: "Handcraft",
-            links: [
-              { label: "文章", href: "/posts" },
-              { label: "關於", href: "/about" },
-            ],
-          }}
-        />
+        <hr className="border-stone-200" />
 
-        <FocusGalleryBlock
-          id="focus-gallery"
-          label="Moments"
-          title="用鏡頭記錄生活"
-          images={[
-            { src: "/images/home/image-2.jpg" },
-            { src: "/images/home/image-1.jpg" },
-            { src: "/posts/hello-world/images/image1.jpg" },
-            { src: "/posts/hello-world/images/image2.jpg" },
-          ]}
-        />
+        {/* Experience */}
+        <section>
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
+            工作經歷 Experience
+          </h2>
+          <div className="flex flex-col">
+            {DATA.experience.map((exp, i) => (
+              <div key={i} className="flex gap-4">
+                {/* Timeline */}
+                <div className="flex flex-col items-center shrink-0 w-4">
+                  <div className="w-2.5 h-2.5 rounded-full border-2 border-stone-300 bg-white mt-3 shrink-0" />
+                  {i < DATA.experience.length - 1 && (
+                    <div className="w-px flex-1 bg-stone-200 my-1" />
+                  )}
+                </div>
+                {/* Content */}
+                <div
+                  className={`flex flex-col gap-4 ${i < DATA.experience.length - 1 ? "pb-10" : ""}`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-lg font-bold tracking-tight text-stone-800">
+                        {exp.role}
+                      </p>
+                      <p className="text-sm font-medium text-stone-500 mt-0.5">
+                        {exp.company}
+                        {exp.location && (
+                          <span className="font-normal text-stone-400">
+                            {" "}
+                            · {exp.location}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                    <span className="text-xs text-stone-400 tracking-wide shrink-0 mt-1">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <ul className="flex flex-col gap-1.5 list-disc list-outside pl-4">
+                    <li className="text-sm text-stone-600 leading-relaxed">
+                      {exp.desc}
+                    </li>
+                    {exp.highlights?.map((h, j) => (
+                      <li
+                        key={j}
+                        className="text-sm text-stone-500 leading-relaxed"
+                      >
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <PolaroidGalleryBlock
-          id="polaroid-gallery"
-          label="Memories"
-          images={[
-            { src: "/images/home/image-1.jpg", caption: "2024 春" },
-            { src: "/posts/hello-world/cover.jpg", caption: "Hello World" },
-            { src: "/images/home/image-2.jpg", caption: "日常" },
-            { src: "/posts/hello-world/images/image1.jpg", caption: "光與影" },
-            { src: "/images/home/image-3.jpg", caption: "靜物" },
-          ]}
-        />
+        <hr className="border-stone-200" />
 
-        <VideoHeroBlock
-          id="video-hero"
-          src="/videos/demo.mp4"
-          eyebrow="Handcraft"
-          title={`文字，是最慢的\n藝術。`}
-          subtitle="在這個快速消費的時代，我們選擇放慢腳步，用文字記錄真實的生活。"
-          ctaText="開始閱讀"
-          ctaHref="/posts"
-          overlayOpacity={55}
-        />
+        {/* Projects */}
+        <section>
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
+            個人專案 Projects
+          </h2>
+          <div className="flex flex-col gap-8">
+            {DATA.projects.map((proj, i) => (
+              <div key={i} className="flex flex-col gap-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-lg font-bold tracking-tight text-stone-800">
+                      {proj.name}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2 mt-1">
+                      <span className="text-xs text-stone-400">
+                        {proj.year}
+                      </span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-green-50 border border-green-200 text-green-600">
+                        {proj.status}
+                      </span>
+                      {proj.solo && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-stone-100 border border-stone-200 text-stone-500">
+                          {proj.solo}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1 shrink-0">
+                    {proj.scale.map((s) => (
+                      <span key={s} className="text-xs text-stone-400">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-stone-600 leading-relaxed">
+                  {proj.summary}
+                </p>
+                <ul className="flex flex-col gap-1.5 list-disc list-outside pl-4">
+                  {proj.highlights.map((h, j) => (
+                    <li
+                      key={j}
+                      className="text-sm text-stone-500 leading-relaxed"
+                    >
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-1.5">
+                  {proj.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs px-2.5 py-1 rounded-md border border-stone-200 text-stone-600 bg-stone-100/40"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs text-stone-400 italic">{proj.note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <VideoEditorialBlock
-          id="video-editorial"
-          src="/videos/demo.mp4"
-          eyebrow="Behind the Craft"
-          title={"每一篇文字\n背後的故事"}
-          body="寫作不只是輸出想法，更是一種與自己對話的過程。每一篇文章都需要時間沉澱，才能讓文字真正有重量。"
-          footnote="Handcraft 相信慢即是快，深即是廣。"
-          ctaText="了解更多"
-          ctaHref="/about"
-          videoSide="right"
-        />
+        <hr className="border-stone-200" />
 
-        <VideoSpotlightBlock
-          id="video-spotlight"
-          src="/videos/demo.mp4"
-          backgroundImage="/images/home/image-1.jpg"
-          label="Demo"
-          caption="Handcraft — 手工文字的誕生"
-          overlayOpacity={50}
-        />
+        {/* Languages */}
+        <section>
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
+            語言能力 Languages
+          </h2>
+          <div className="flex flex-col gap-4">
+            {DATA.languages.map((l) => (
+              <div key={l.lang} className="flex items-center gap-4">
+                <span className="text-sm text-stone-700 w-10 shrink-0">
+                  {l.lang}
+                </span>
+                <div className="flex-1 h-1.5 rounded-full bg-stone-100 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-stone-400"
+                    style={{ width: `${l.pct}%` }}
+                  />
+                </div>
+                <span className="text-xs text-stone-400 w-16 shrink-0">
+                  {l.level}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <ImageReelBlock
-          id="image-reel"
-          images={REEL_IMAGES}
-          label="Manifesto"
-          title={"不批量生產，\n只手工雕琢。"}
-          subtitle="每一篇文章都花時間沉澱，因為文字值得被認真對待。"
-          tickerWordsTop={[
-            "手工藝",
-            "思考",
-            "靈感",
-            "創作",
-            "生活",
-            "記錄",
-            "探索",
-            "文字",
-          ]}
-          tickerWordsBottom={[
-            "Writing",
-            "Thinking",
-            "Living",
-            "Creating",
-            "Exploring",
-            "Crafting",
-            "Sharing",
-            "Reflecting",
-          ]}
-          reelDuration={48}
-        />
+        <hr className="border-stone-200" />
 
-        <PullQuoteBlock
-          id="pull-quote"
-          quote="好的文字不需要大聲，它只需要真實。"
-          author="Handcraft"
-          role="創作理念"
-          image="/images/home/image-3.jpg"
-          overlay="dark"
-          align="center"
-        />
+        {/* Education */}
+        <section>
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
+            學歷 Education
+          </h2>
+          <div className="flex flex-col divide-y divide-stone-200">
+            {DATA.education.map((edu, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0"
+              >
+                <div>
+                  <p className="font-medium tracking-tight text-sm text-stone-800">
+                    {edu.school}
+                  </p>
+                  {edu.dept && (
+                    <p className="text-xs text-stone-500 mt-0.5">{edu.dept}</p>
+                  )}
+                  <p className="text-xs text-stone-400 mt-0.5">{edu.note}</p>
+                </div>
+                <span className="text-xs text-stone-400 shrink-0">
+                  {edu.period}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <StatementBlock
-          id="statement"
-          variant="dark"
-          label="About"
-          statement={"文字不是\n快消品。"}
-          footnote="在這裡，每一篇都值得花時間讀完。"
-          nav={{
-            logo: "Handcraft",
-            links: [
-              { label: "文章", href: "/posts" },
-              { label: "關於", href: "/about" },
-            ],
-          }}
-        />
+        <hr className="border-stone-200" />
 
-        <StorySplitBlock
-          id="story-split"
-          eyebrow="Story"
-          sectionNumber="01"
-          title="慢下來，才能看見真正重要的事。"
-          subtitle="Craft"
-          body="在資訊過載的時代，選擇放慢腳步。每一篇文章都經過反覆思考與打磨，不為點擊率，只為留下值得回讀的文字。"
-        />
+        {/* Photography */}
+        <section>
+          <div className="flex items-start justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
+                攝影 Photography
+              </h2>
+              <p className="text-sm text-stone-600 leading-relaxed">
+                喜歡在出門的途中，將偶然入眼的美好瞬間收進鏡頭裡——或許是轉角的光線，或許是某個不起眼的角落。攝影對我來說不是創作，而是一種記錄生活的方式。作品在
+                Unsplash 上的觀看數位居全站前 10%。
+              </p>
+            </div>
+            <a
+              href="https://unsplash.com/@floatflower"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="查看 Unsplash 作品集"
+              className="shrink-0 text-stone-400 hover:text-stone-700 transition-colors"
+            >
+              <i className="fa-solid fa-arrow-up-right-from-square" />
+            </a>
+          </div>
+          <PhotoGrid />
+        </section>
+      </div>
 
-        <StoryImageAsideBlock
-          id="story-image-aside"
-          eyebrow="Life"
-          title="用影像說一個故事。"
-          subtitle="Photography"
-          body="每一張照片背後都有一段時間的沉澱，鏡頭只是記錄，真正的主角是光線與情感之間的那一刻。"
-          image="/images/home/image-2.jpg"
-          imageSide="right"
-        />
-
-        <StoryCenteredBlock
-          id="story-centered"
-          eyebrow="Reflection"
-          title="靜下來，聽文字說話。"
-          subtitle="2024"
-          body="有些話不需要大聲，只要真實。在這裡，文字是最輕的重量，也是最深的連結。"
-          image="/images/home/image-3.jpg"
-          overlay="dark"
-        />
-
-        <StoryStackedBlock
-          id="story-stacked"
-          eyebrow="Essay"
-          title="不批量生產，只手工雕琢。"
-          subtitle="Handcraft Studio"
-          body="寫作不只是輸出想法，更是一種與自己對話的過程。每一篇文章都需要時間沉澱，才能讓文字真正有重量。"
-          image="/posts/hello-world/cover.jpg"
-        />
-
-        <SplitTextBlock
-          id="split-text"
-          eyebrow="Craft"
-          sectionNumber="02"
-          title="慢下來，才能看見真正重要的事。"
-          body="在資訊過載的時代，Handcraft 選擇放慢腳步。每一篇文章都經過反覆思考與打磨，不為點擊率，只為留下值得回讀的文字。"
-          footnote="寫作是一種修煉，讀者是最好的見證者。"
-          linkHref="/about"
-          linkText="關於這裡"
-        />
-
-        <PhilosophyBlock
-          id="philosophy"
-          label="Philosophy"
-          title="創作理念"
-          image="/posts/hello-world/cover.jpg"
-          imageLabel="Philosophy"
-          items={[
-            {
-              num: "01",
-              title: "手工",
-              desc: "每一篇文章都是親手打造，不批量生產，不為流量服務。",
-            },
-            {
-              num: "02",
-              title: "真實",
-              desc: "紀錄真實的思考與感受，不過度包裝，不迎合演算法。",
-            },
-            {
-              num: "03",
-              title: "沉澱",
-              desc: "文字是思想的沉澱，寫作是與自己對話最誠實的方式。",
-            },
-          ]}
-        />
-
-        <ManifestoBlock
-          id="manifesto"
-          eyebrow="我們相信"
-          lines={[
-            { text: "手作是一種誠實。" },
-            { text: "慢是一種立場，不是缺陷。", style: "italic", indent: true },
-            { text: "文字值得被認真對待。" },
-            { text: "讀者不是流量，是對話的對象。", indent: true },
-            { text: "每一篇，都是一個承諾。", style: "italic" },
-          ]}
-          linkHref="/posts"
-          linkText="開始閱讀"
-          variant="dark"
-        />
-
-        <PosterHeroBlock
-          id="poster-hero"
-          title="Handcraft"
-          eyebrow="文字是手工藝，每一篇都是用心雕琢的作品"
-          image="/images/home/people.png"
-          ctaText="開始閱讀"
-          ctaHref="/posts"
-          socialProof={{ count: `${allPosts.length}+`, text: "篇文章" }}
-          tags={["手工", "文字", "創作", "生活", "思考"]}
-          nav={{
-            logo: "Handcraft",
-            links: [
-              { label: "文章", href: "/posts" },
-              { label: "關於", href: "/about" },
-            ],
-          }}
-        />
-
-        {timelineItems.length > 0 && (
-          <TimelineBlock
-            id="timeline"
-            label="Latest"
-            title="最新文章"
-            items={timelineItems}
-            viewAllHref="/posts"
-            viewAllText="查看全部"
-          />
-        )}
-
-        {showcaseItems.length >= 3 && (
-          <CardGridShowcaseBlock
-            id="card-grid-showcase"
-            eyebrow="近期文章"
-            title="最新更新"
-            items={showcaseItems.slice(0, 3)}
-            viewAllHref="/posts"
-            viewAllText="查看全部"
-          />
-        )}
-
-        {showcaseItems.length >= 3 && (
-          <MagazineShowcaseBlock
-            id="magazine-showcase"
-            eyebrow="精選"
-            items={
-              showcaseItems.slice(0, 3) as [
-                (typeof showcaseItems)[0],
-                (typeof showcaseItems)[0],
-                (typeof showcaseItems)[0],
-              ]
-            }
-          />
-        )}
-
-        {showcaseItems.length > 0 && (
-          <MinimalListShowcaseBlock
-            id="minimal-list-showcase"
-            eyebrow="Archive"
-            title="所有文章"
-            items={showcaseItems}
-            viewAllHref="/posts"
-            viewAllText="查看全部"
-            variant="dark"
-          />
-        )}
-
-        {featuredPost && (
-          <FeaturePostBlock
-            id="feature-post"
-            label="Featured"
-            title={featuredPost.metadata.title ?? featuredPost.slug}
-            excerpt={featuredPost.metadata.excerpt}
-            date={
-              featuredPost.metadata.createdAt
-                ? dayjs(featuredPost.metadata.createdAt).format("MMM D, YYYY")
-                : undefined
-            }
-            href={`/posts/${featuredPost.slug}`}
-            backgroundImage={
-              (featuredPost.metadata.coverImage as { url?: string } | undefined)
-                ?.url ?? "/posts/hello-world/images/image2.jpg"
-            }
-            tags={
-              Array.isArray(featuredPost.metadata.tags)
-                ? (featuredPost.metadata.tags as string[]).slice(0, 3)
-                : []
-            }
-            nav={{
-              logo: "Handcraft",
-              links: [
-                { label: "文章", href: "/posts" },
-                { label: "關於", href: "/about" },
-              ],
-            }}
-          />
-        )}
-
-        <PurseHeroBlock
-          id="purse-hero"
-          title="隨身的工藝"
-          subtitle="每一個細節都是手工打磨，帶著它，帶著自己的品味。"
-          eyebrow="New Arrival"
-          tags={["皮革", "手工", "經典", "輕奢"]}
-          ctaText="探索更多"
-          ctaHref="/posts"
-          nav={{
-            logo: "Handcraft",
-            links: [
-              { label: "文章", href: "/posts" },
-              { label: "關於", href: "/about" },
-            ],
-          }}
-        />
-
-        <CharacterShowcaseBlock
-          id="character-showcase-01"
-          colorScheme="red-black"
-          characterName="昊仔"
-          codeName="Haozai qwq"
-          subtitle="電擊ダメージ"
-          characterImage="/images/home/character-02.png"
-          statLines={["電擊ダメージ属性攻撃", "境域大木にて音楽の魂を宿す"]}
-          abilities={[
-            { label: "攻撃", value: 88 },
-            { label: "防御", value: 62 },
-            { label: "速度", value: 95 },
-            { label: "魔力", value: 74 },
-            { label: "体力", value: 80 },
-            { label: "運気", value: 57 },
-          ]}
-          galleryImages={[
-            "/images/home/image-1.jpg",
-            "/images/home/image-2.jpg",
-            "/images/home/image-3.jpg",
-            "/posts/hello-world/cover.jpg",
-          ]}
-        />
-
-        <CharacterShowcaseBlock
-          id="character-showcase-03"
-          colorScheme="yellow-black"
-          characterName="昊仔"
-          codeName="Haozai qwq"
-          subtitle="電擊ダメージ"
-          characterImage="/images/home/character-03.png"
-          statLines={["電擊ダメージ属性攻撃", "境域大木にて音楽の魂を宿す"]}
-          abilities={[
-            { label: "攻撃", value: 88 },
-            { label: "防御", value: 62 },
-            { label: "速度", value: 95 },
-            { label: "魔力", value: 74 },
-            { label: "体力", value: 80 },
-            { label: "運気", value: 57 },
-          ]}
-          galleryImages={[
-            "/images/home/image-1.jpg",
-            "/images/home/image-2.jpg",
-            "/images/home/image-3.jpg",
-            "/posts/hello-world/cover.jpg",
-          ]}
-        />
-
-        <CharacterShowcaseBlock
-          id="character-showcase-04"
-          colorScheme="teal-black"
-          characterName="昊仔"
-          codeName="Haozai qwq"
-          subtitle="電擊ダメージ"
-          characterImage="/images/home/character-04.png"
-          statLines={["電擊ダメージ属性攻撃", "境域大木にて音楽の魂を宿す"]}
-          abilities={[
-            { label: "攻撃", value: 88 },
-            { label: "防御", value: 62 },
-            { label: "速度", value: 95 },
-            { label: "魔力", value: 74 },
-            { label: "体力", value: 80 },
-            { label: "運気", value: 57 },
-          ]}
-          galleryImages={[
-            "/images/home/image-1.jpg",
-            "/images/home/image-2.jpg",
-            "/images/home/image-3.jpg",
-            "/posts/hello-world/cover.jpg",
-          ]}
-        />
-
-        <CharacterShowcaseBlock
-          id="character-showcase-05"
-          colorScheme="red-gray"
-          characterName="昊仔"
-          codeName="Haozai qwq"
-          subtitle="電擊ダメージ"
-          characterImage="/images/home/character-06.png"
-          statLines={["電擊ダメージ属性攻撃", "境域大木にて音楽の魂を宿す"]}
-          abilities={[
-            { label: "攻撃", value: 88 },
-            { label: "防御", value: 62 },
-            { label: "速度", value: 95 },
-            { label: "魔力", value: 74 },
-            { label: "体力", value: 80 },
-            { label: "運気", value: 57 },
-          ]}
-          galleryImages={[
-            "/images/home/image-1.jpg",
-            "/images/home/image-2.jpg",
-            "/images/home/image-3.jpg",
-            "/posts/hello-world/cover.jpg",
-          ]}
-        />
-
-        <CharacterShowcaseBlock
-          id="character-showcase-06"
-          colorScheme="teal-gray"
-          characterName="昊仔"
-          codeName="Haozai qwq"
-          subtitle="電擊ダメージ"
-          characterImage="/images/home/character-05.png"
-          statLines={["電擊ダメージ属性攻撃", "境域大木にて音楽の魂を宿す"]}
-          abilities={[
-            { label: "攻撃", value: 88 },
-            { label: "防御", value: 62 },
-            { label: "速度", value: 95 },
-            { label: "魔力", value: 74 },
-            { label: "体力", value: 80 },
-            { label: "運気", value: 57 },
-          ]}
-          galleryImages={[
-            "/images/home/image-1.jpg",
-            "/images/home/image-2.jpg",
-            "/images/home/image-3.jpg",
-            "/posts/hello-world/cover.jpg",
-          ]}
-        />
-
-        <CharacterShowcaseBlock
-          id="character-showcase-02"
-          colorScheme="yellow-gray"
-          characterName="昊仔"
-          codeName="Haozai qwq"
-          subtitle="電擊ダメージ"
-          characterImage="/images/home/character-01.png"
-          statLines={["電擊ダメージ属性攻撃", "境域大木にて音楽の魂を宿す"]}
-          abilities={[
-            { label: "攻撃", value: 88 },
-            { label: "防御", value: 62 },
-            { label: "速度", value: 95 },
-            { label: "魔力", value: 74 },
-            { label: "体力", value: 80 },
-            { label: "運気", value: 57 },
-          ]}
-          galleryImages={[
-            "/images/home/image-1.jpg",
-            "/images/home/image-2.jpg",
-            "/images/home/image-3.jpg",
-            "/posts/hello-world/cover.jpg",
-          ]}
-        />
-
-        <WaveformPlayerBlock
-          id="waveform-player"
-          src="/audios/demo.mp3"
-          title="Demo Track"
-          artist="Handcraft"
-        />
-
-        <CoverPlayerBlock
-          id="cover-player"
-          src="/audios/demo.mp3"
-          backgroundImage="/images/home/image-1.jpg"
-          title="Demo Track"
-          artist="Handcraft"
-          label="Now Playing"
-        />
-
-        <LinksGridBlock
-          id="links-grid"
-          eyebrow="Connect"
-          title="找到我們"
-          subtitle="選擇你最習慣的方式，與我們保持聯繫。"
-          links={[
-            {
-              platform: "Facebook",
-              handle: "@handcraft",
-              href: "https://facebook.com",
-            },
-            {
-              platform: "Instagram",
-              handle: "@handcraft",
-              href: "https://instagram.com",
-            },
-            {
-              platform: "Twitter",
-              handle: "@handcraft",
-              href: "https://twitter.com",
-            },
-            { platform: "Line", handle: "@handcraft", href: "https://line.me" },
-            {
-              platform: "YouTube",
-              handle: "Handcraft",
-              href: "https://youtube.com",
-            },
-            {
-              platform: "Email",
-              handle: "hello@handcraft.com",
-              href: "mailto:hello@handcraft.com",
-            },
-          ]}
-        />
-
-        <CtaTagIndexBlock
-          id="cta-tag-index"
-          eyebrow="Topics"
-          title="你想從哪裡開始？"
-          subtitle="選擇一個主題，進入那個世界。"
-          tags={[
-            { label: "手工", href: "/tags/手工/1", count: 12 },
-            { label: "文字", href: "/tags/文字/1", count: 8 },
-            { label: "創作", href: "/tags/創作/1", count: 15 },
-            { label: "生活", href: "/tags/生活/1", count: 20 },
-            { label: "思考", href: "/tags/思考/1", count: 6 },
-            { label: "攝影", href: "/tags/攝影/1", count: 9 },
-          ]}
-        />
-
-        <CtaTagsBlock
-          id="cta-tags"
-          eyebrow="Explore"
-          title="找到你感興趣的主題"
-          subtitle="從這些標籤出發，找到與你共鳴的文字。"
-          image="/images/home/image-1.jpg"
-          overlayOpacity={55}
-          tags={[
-            { label: "手工", href: "/tags/手工/1" },
-            { label: "文字", href: "/tags/文字/1" },
-            { label: "創作", href: "/tags/創作/1" },
-            { label: "生活", href: "/tags/生活/1" },
-            { label: "思考", href: "/tags/思考/1" },
-            { label: "攝影", href: "/tags/攝影/1" },
-            { label: "設計", href: "/tags/設計/1" },
-            { label: "音樂", href: "/tags/音樂/1" },
-          ]}
-        />
-
-        <CtaFullTextBlock
-          id="cta-full-text"
-          eyebrow="Handcraft"
-          title={"準備好了嗎？"}
-          subtitle="每一篇文章都是一次對話的邀請，不需要準備，只需要一點好奇心。"
-          variant="dark"
-          actions={[
-            { label: "開始閱讀", href: "/posts" },
-            { label: "關於這裡", href: "/about" },
-          ]}
-        />
-
-        <CtaBlock
-          id="cta"
-          label="Start Reading"
-          count={allPosts.length}
-          countLabel="篇文章，等著你。"
-          href="/posts"
-          buttonText="開始閱讀"
-          backgroundImage="/posts/hello-world/images/image1.jpg"
-          nav={{
-            logo: "Handcraft",
-            links: [
-              { label: "文章", href: "/posts" },
-              { label: "關於", href: "/about" },
-            ],
-          }}
-        />
+      {/* ── Footer ───────────────────────────────────── */}
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="border-t border-stone-200 py-6 flex justify-between items-center">
+          <span className="text-xs text-stone-400">
+            © 2026 黃建霖 Jerry Huang
+          </span>
+          <span className="text-xs text-stone-400">floatflower.me</span>
+        </div>
       </div>
     </div>
   );
