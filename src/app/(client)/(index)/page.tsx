@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { PhotoGrid } from "./_components/photo-grid";
 import { AvatarLightbox } from "./_components/avatar-lightbox";
 
@@ -18,7 +13,7 @@ const DATA = {
   tagline: "一個熱衷於手工藝、料理的資深全端工程師",
   links: [
     {
-      label: "floatflower.me",
+      label: "個人網站",
       tooltip: "floatflower.me",
       url: "https://floatflower.me",
       icon: "fa-solid fa-globe",
@@ -50,28 +45,6 @@ const DATA = {
   ],
   experience: [
     {
-      role: "技術長 (CTO)",
-      company: "跳跳股份有限公司",
-      location: "台灣，台中",
-      period: "2018.07 — 2020.12",
-      desc: "主導六人技術團隊，全權負責系統架構規劃與核心技術決策，帶領產品從無到有完整落地。",
-      highlights: [
-        "主導 JINS 台灣官方網站及後台管理系統的設計與開發",
-        "設計並實作門市 POS 出單系統：將 Rust 程式交叉編譯後部署至市售 OpenWRT 路由器，作為門市邊緣網關，以極低硬體成本打通雲端與地端的即時出單鏈路",
-      ],
-    },
-    {
-      role: "創辦人 · 全端工程師",
-      company: "Fresco Technology 賦睿科技",
-      location: "台灣，台中",
-      period: "2021.01 — 2023.03",
-      desc: "創立個人開發公司，獨立承接並交付多元前後端專案，範疇涵蓋 Web App 開發、API 設計與雲端基礎設施建置。",
-      highlights: [
-        "獨立完成 GhettoSharkhood ERC721 NFT 智能合約及 Mint DApp 開發，並成功上線發行",
-        "承接 Jerawine.com 外包開發，負責全端實作與交付",
-      ],
-    },
-    {
       role: "後端工程師",
       company: "Jerawine",
       location: "英國（遠端）",
@@ -82,6 +55,32 @@ const DATA = {
         "對 Livex 逾 3,500 萬筆紅酒歷史交易資料進行建模分析，以 R 語言產出價格預測指標，輔助信貸審核決策",
         "獨力建置並維運完整基礎設施，涵蓋 GitLab CI/CD pipeline、AWS App Runner 與 RDS 的全自動化部署流程",
         "並行協助母公司 Coterie Holdings（英國）開發內部管理系統",
+      ],
+    },
+    {
+      role: "創辦人 · 全端工程師",
+      company: "Fresco Technology 賦睿科技",
+      location: "台灣，台中",
+      period: "2021.01 — 2023.03",
+      desc: "創立個人開發公司，獨立承接並交付多元前後端專案，範疇涵蓋 Web App 開發、API 設計與雲端基礎設施建置。",
+      highlights: [
+        {
+          text: "獨立完成 GhettoSharkhood ERC721 智能合約與 Mint DApp 全端開發，支撐客戶首波發行達 1,500 萬台幣銷售額，Mint 當日零合約異常、零資金事故。",
+          keyword: "GhettoSharkhood",
+          href: "https://opensea.io/collection/ghettosharkhood",
+        },
+        "承接 Jerawine.com 外包開發，負責全端實作與交付",
+      ],
+    },
+    {
+      role: "技術長 (CTO)",
+      company: "跳跳股份有限公司",
+      location: "台灣，台中",
+      period: "2018.07 — 2020.12",
+      desc: "大學在學期間兼任技術長，主導六人技術團隊，全權負責系統架構規劃與核心技術決策，帶領產品從無到有完整落地。",
+      highlights: [
+        "主導 JINS 台灣官方網站及後台管理系統的設計與開發",
+        "設計並實作門市 POS 出單系統：將 Rust 程式交叉編譯後部署至市售 OpenWRT 路由器，作為門市邊緣網關，以極低硬體成本打通雲端與地端的即時出單鏈路",
       ],
     },
   ],
@@ -149,39 +148,70 @@ const DATA = {
         "TapPay",
       ],
     },
+    {
+      name: "個人品牌電商",
+      year: "2022",
+      status: "上線中",
+      solo: "獨立創辦 · 全端開發",
+      scale: ["3,000+ X 粉絲", "4,200+ Instagram 粉絲"],
+      summary:
+        "以個人身份獨立創辦並持續營運的品牌電商，從無到有一手包辦品牌定位、商品設計打樣、供應鏈洽談、視覺拍攝與修圖，到網站開發運維、金流串接與社群行銷，完整貫穿一門生意的每個環節。",
+      highlights: [
+        "自主拍攝商品視覺，並以 Photoshop / Lightroom / Evoto 完成全套修圖流程",
+        "獨立設計商品、洽談打樣與供應商合作，掌握完整供應鏈",
+        "同步經營 X、Instagram、Facebook 三個社群頻道，累積 X 3,000+、Instagram 4,200+ 粉絲",
+        "全端獨立開發並自主維運網站，涵蓋金流串接與上線後持續迭代",
+      ],
+      note: "",
+      tech: ["Next.js", "PostgreSQL", "DigitalOcean"],
+    },
   ],
   languages: [
     { lang: "中文", level: "母語", pct: 100 },
     { lang: "英文", level: "中等偏上", pct: 70 },
     { lang: "日文", level: "中等", pct: 40 },
   ],
-  skills: [
-    { cat: "Frontend", items: ["React", "Next.js"] },
+  skillHighlights: [
+    { name: "Next.js", pct: 90, level: "精通" },
+    { name: "Express.js", pct: 80, level: "熟練" },
+    { name: "Nest.js", pct: 70, level: "良好" },
+    { name: "React", pct: 60, level: "中等" },
+    { name: "Symfony PHP", pct: 90, level: "精通" },
+    { name: "Cloudflare", pct: 80, level: "熟練" },
+    { name: "GCP", pct: 70, level: "良好" },
+    { name: "AWS", pct: 70, level: "良好" },
+  ],
+  skillTags: [
     {
-      cat: "Backend",
-      items: [
-        "Nest.js",
-        "Express.js",
-        "Symfony PHP",
-        "GraphQL (Apollo)",
-        "Prisma",
-        "Temporal",
-      ],
+      name: "GraphQL (Apollo)",
+      cls: "bg-emerald-50 border-emerald-200 text-emerald-600",
     },
-    { cat: "Search & Queue", items: ["Typesense", "Algolia", "RabbitMQ"] },
-    { cat: "Database", items: ["PostgreSQL", "MySQL", "Redis", "Valkey"] },
     {
-      cat: "Cloud & Infra",
-      items: [
-        "AWS",
-        "GCP",
-        "Firebase",
-        "Digital Ocean",
-        "Docker",
-        "Cloudflare",
-      ],
+      name: "Prisma",
+      cls: "bg-emerald-50 border-emerald-200 text-emerald-600",
     },
-    { cat: "Web3", items: ["ERC721", "ERC20"] },
+    {
+      name: "Temporal",
+      cls: "bg-emerald-50 border-emerald-200 text-emerald-600",
+    },
+    {
+      name: "Typesense",
+      cls: "bg-orange-50 border-orange-200 text-orange-600",
+    },
+    { name: "Algolia", cls: "bg-orange-50 border-orange-200 text-orange-600" },
+    { name: "RabbitMQ", cls: "bg-orange-50 border-orange-200 text-orange-600" },
+    {
+      name: "PostgreSQL",
+      cls: "bg-violet-50 border-violet-200 text-violet-600",
+    },
+    { name: "MySQL", cls: "bg-violet-50 border-violet-200 text-violet-600" },
+    { name: "Redis", cls: "bg-violet-50 border-violet-200 text-violet-600" },
+    { name: "Valkey", cls: "bg-violet-50 border-violet-200 text-violet-600" },
+    { name: "Firebase", cls: "bg-sky-50 border-sky-200 text-sky-600" },
+    { name: "Digital Ocean", cls: "bg-sky-50 border-sky-200 text-sky-600" },
+    { name: "Docker", cls: "bg-sky-50 border-sky-200 text-sky-600" },
+    { name: "ERC721", cls: "bg-amber-50 border-amber-200 text-amber-600" },
+    { name: "ERC20", cls: "bg-amber-50 border-amber-200 text-amber-600" },
   ],
 };
 
@@ -214,22 +244,27 @@ export default function PortfolioPage() {
           <p className="text-sm text-stone-500 mt-1">{DATA.tagline}</p>
         </div>
 
-        <div className="flex flex-wrap gap-5 pb-8 border-b border-stone-200">
+        <div className="flex flex-wrap gap-2 pb-8 border-b border-stone-200">
           {DATA.links.map((link) => (
-            <Tooltip key={link.label}>
-              <TooltipTrigger>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="text-stone-400 hover:text-stone-700 transition-colors text-xl"
-                >
-                  <i className={link.icon} />
-                </a>
-              </TooltipTrigger>
-              <TooltipContent>{link.tooltip}</TooltipContent>
-            </Tooltip>
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-lg border border-stone-200 hover:border-stone-300 hover:bg-stone-50 transition-colors group"
+            >
+              <i
+                className={`${link.icon} text-stone-400 group-hover:text-stone-600 transition-colors text-sm w-4 text-center`}
+              />
+              <div className="flex flex-col">
+                <span className="text-xs font-medium text-stone-600 leading-tight">
+                  {link.label}
+                </span>
+                <span className="text-xs text-stone-400 leading-tight">
+                  {link.tooltip}
+                </span>
+              </div>
+            </a>
           ))}
         </div>
       </div>
@@ -241,23 +276,32 @@ export default function PortfolioPage() {
           <h2 className="text-xs font-semibold tracking-widest uppercase text-stone-400 mb-6">
             技術能力 Skills
           </h2>
-          <div className="flex flex-col gap-4">
-            {DATA.skills.map((cat) => (
-              <div key={cat.cat} className="flex gap-4 items-start">
-                <span className="text-xs text-stone-400 w-28 shrink-0 pt-0.5 text-right">
-                  {cat.cat}
+          <div className="flex flex-col gap-3 mb-8">
+            {DATA.skillHighlights.map((s) => (
+              <div key={s.name} className="flex items-center gap-4">
+                <span className="text-sm text-stone-700 w-28 shrink-0">
+                  {s.name}
                 </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {cat.items.map((item) => (
-                    <span
-                      key={item}
-                      className="text-xs px-2.5 py-1 rounded-md border border-stone-200 text-stone-600 bg-stone-100/40"
-                    >
-                      {item}
-                    </span>
-                  ))}
+                <div className="flex-1 h-1.5 rounded-full bg-stone-100 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-stone-400"
+                    style={{ width: `${s.pct}%` }}
+                  />
                 </div>
+                <span className="text-xs text-stone-400 w-8 shrink-0 text-right">
+                  {s.level}
+                </span>
               </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {DATA.skillTags.map((t) => (
+              <span
+                key={t.name}
+                className={`text-xs px-2.5 py-1 rounded-md border ${t.cls}`}
+              >
+                {t.name}
+              </span>
             ))}
           </div>
         </section>
@@ -311,7 +355,27 @@ export default function PortfolioPage() {
                         key={j}
                         className="text-sm text-stone-500 leading-relaxed"
                       >
-                        {h}
+                        {typeof h === "string" ? (
+                          h
+                        ) : (
+                          <span>
+                            {h.text.split(h.keyword).map((part, k, arr) => (
+                              <span key={k}>
+                                {part}
+                                {k < arr.length - 1 && (
+                                  <a
+                                    href={h.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline underline-offset-2 hover:text-stone-700 transition-colors"
+                                  >
+                                    {h.keyword}
+                                  </a>
+                                )}
+                              </span>
+                            ))}
+                          </span>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -381,7 +445,9 @@ export default function PortfolioPage() {
                     </span>
                   ))}
                 </div>
-                <p className="text-xs text-stone-400 italic">{proj.note}</p>
+                {proj.note && (
+                  <p className="text-xs text-stone-400 italic">{proj.note}</p>
+                )}
               </div>
             ))}
           </div>
