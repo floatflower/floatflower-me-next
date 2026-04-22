@@ -49,7 +49,7 @@ const DATA = {
       company: "Jerawine",
       location: "英國（遠端）",
       period: "2023.03 — 至今",
-      desc: "以單一後端工程師身份，遠端服務英國紅酒借貸新創，獨立承擔從需求分析、架構設計、基礎設施維運到系統持續迭代的完整開發週期。",
+      desc: "獨立開發後端，服務英國紅酒借貸新創，獨立承擔從需求分析、架構設計、基礎設施維運到系統持續迭代的完整開發週期。",
       highlights: [
         "主導平台 v1（Symfony PHP）的開發與維運；需求穩定後推動全面架構重設計，以 Next.js + GraphQL + PostgreSQL 重構為 v2，系統性消除早期技術債",
         "對 Livex 逾 3,500 萬筆紅酒歷史交易資料進行建模分析，以 R 語言產出價格預測指標，輔助信貸審核決策",
@@ -89,13 +89,13 @@ const DATA = {
       school: "國立台中教育大學",
       dept: "資訊工程學系",
       period: "2015 — 2021",
-      note: "學士 · 台灣，台中 · 畢業專題第二名",
+      note: "學士 · 台灣，台中 · 畢業專題第二名（主題：基於Qt C++之HTTP微服務框架開發），並獲得大學生研究計畫補助（計劃編號：107-2813-C-142-043-E）",
     },
     {
       school: "華中科技大學",
       dept: "軟件工程學院",
       period: "2016.07 — 2017.02",
-      note: "交換學生 · 湖北，武漢 · 入選校內創業團隊冰岩作坊",
+      note: "交換學生 · 湖北，武漢 · 入選華中科技大學校內頂級創業團隊「冰岩作坊」",
     },
     {
       school: "國立台中第一高級中學",
@@ -174,44 +174,39 @@ const DATA = {
   skillHighlights: [
     { name: "Next.js", pct: 90, level: "精通" },
     { name: "Express.js", pct: 80, level: "熟練" },
-    { name: "Nest.js", pct: 70, level: "良好" },
-    { name: "React", pct: 60, level: "中等" },
+    { name: "Nest.js", pct: 70, level: "熟練" },
+    { name: "React", pct: 60, level: "可獨立使用" },
     { name: "Symfony PHP", pct: 90, level: "精通" },
     { name: "Cloudflare", pct: 80, level: "熟練" },
-    { name: "GCP", pct: 70, level: "良好" },
-    { name: "AWS", pct: 70, level: "良好" },
+    { name: "GCP", pct: 70, level: "熟練" },
+    { name: "AWS", pct: 70, level: "熟練" },
   ],
-  skillTags: [
+  skillTagGroups: [
     {
-      name: "GraphQL (Apollo)",
+      label: "後端 & API",
       cls: "bg-emerald-50 border-emerald-200 text-emerald-600",
+      tags: ["GraphQL (Apollo)", "Prisma", "Temporal"],
     },
     {
-      name: "Prisma",
-      cls: "bg-emerald-50 border-emerald-200 text-emerald-600",
-    },
-    {
-      name: "Temporal",
-      cls: "bg-emerald-50 border-emerald-200 text-emerald-600",
-    },
-    {
-      name: "Typesense",
+      label: "搜尋 & 佇列",
       cls: "bg-orange-50 border-orange-200 text-orange-600",
+      tags: ["Typesense", "Algolia", "RabbitMQ"],
     },
-    { name: "Algolia", cls: "bg-orange-50 border-orange-200 text-orange-600" },
-    { name: "RabbitMQ", cls: "bg-orange-50 border-orange-200 text-orange-600" },
     {
-      name: "PostgreSQL",
+      label: "資料庫",
       cls: "bg-violet-50 border-violet-200 text-violet-600",
+      tags: ["PostgreSQL", "MySQL", "Redis", "Valkey"],
     },
-    { name: "MySQL", cls: "bg-violet-50 border-violet-200 text-violet-600" },
-    { name: "Redis", cls: "bg-violet-50 border-violet-200 text-violet-600" },
-    { name: "Valkey", cls: "bg-violet-50 border-violet-200 text-violet-600" },
-    { name: "Firebase", cls: "bg-sky-50 border-sky-200 text-sky-600" },
-    { name: "Digital Ocean", cls: "bg-sky-50 border-sky-200 text-sky-600" },
-    { name: "Docker", cls: "bg-sky-50 border-sky-200 text-sky-600" },
-    { name: "ERC721", cls: "bg-amber-50 border-amber-200 text-amber-600" },
-    { name: "ERC20", cls: "bg-amber-50 border-amber-200 text-amber-600" },
+    {
+      label: "雲端 & DevOps",
+      cls: "bg-sky-50 border-sky-200 text-sky-600",
+      tags: ["Firebase", "Digital Ocean", "Docker"],
+    },
+    {
+      label: "Web3",
+      cls: "bg-amber-50 border-amber-200 text-amber-600",
+      tags: ["ERC721", "ERC20"],
+    },
   ],
 };
 
@@ -294,14 +289,27 @@ export default function PortfolioPage() {
               </div>
             ))}
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            {DATA.skillTags.map((t) => (
-              <span
-                key={t.name}
-                className={`text-xs px-2.5 py-1 rounded-md border ${t.cls}`}
+          <p className="text-xs text-stone-400 mb-3">其他開發技能</p>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {DATA.skillTagGroups.map((group) => (
+              <div
+                key={group.label}
+                className="flex flex-col gap-2.5 rounded-xl border border-stone-200 bg-stone-50/50 p-3.5"
               >
-                {t.name}
-              </span>
+                <span className="text-xs font-medium text-stone-500 leading-tight">
+                  {group.label}
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`text-xs px-2.5 py-1 rounded-md border ${group.cls}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </section>
