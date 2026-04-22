@@ -175,7 +175,7 @@ const DATA = {
     { name: "Next.js", pct: 90, level: "精通" },
     { name: "Express.js", pct: 80, level: "熟練" },
     { name: "Nest.js", pct: 70, level: "熟練" },
-    { name: "React", pct: 60, level: "可獨立使用" },
+    { name: "React", pct: 60, level: "熟悉" },
     { name: "Symfony PHP", pct: 90, level: "精通" },
     { name: "Cloudflare", pct: 80, level: "熟練" },
     { name: "GCP", pct: 70, level: "熟練" },
@@ -283,7 +283,7 @@ export default function PortfolioPage() {
                     style={{ width: `${s.pct}%` }}
                   />
                 </div>
-                <span className="text-xs text-stone-400 w-8 shrink-0 text-right">
+                <span className="text-xs text-stone-400 w-16 shrink-0 text-right">
                   {s.level}
                 </span>
               </div>
